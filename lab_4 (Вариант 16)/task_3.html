@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="ru">
+	<head>
+		<style> </style>
+		<meta charset="UTF-8">
+		<title>Task_3</title>
+	</head>
+	<body>
+
+		<h3>Type here:</h3>
+		<textarea id="text" rows="10" style="width:100%" placeholder="text"></textarea><br>
+		<button onclick="analyze()">Calculate</button>
+
+		<div id="result" style="margin-top: 20px;"></div>
+
+		<script>
+		function analyze()
+		{
+			let text = document.getElementById('text').value;
+			let resultDiv = document.getElementById('result');
+
+			let words = text.match(/\b[\p{L}\p{N}]+\b/gu) || [];
+
+			let even = 0;
+			let odd = 0;
+
+			words.forEach(word =>{
+				let lettersOnly = word.replace(/[^a-zA-Zа-яА-ЯёЁ]/gu, '');
+				let length = lettersOnly.length;
+	
+				if (length > 0)
+				{
+					if (length % 2 === 0) {even++;}
+					else {odd++;}
+				}
+			});
+
+			resultDiv.innerHTML = `
+				<p>Total: <strong>${words.length}</strong></p>
+				<p>Even: <strong>${even}</strong></p>
+				<p>Odd: <strong>${odd}</strong></p>`;
+		}
+		</script>
+
+	</body>
+</html>
